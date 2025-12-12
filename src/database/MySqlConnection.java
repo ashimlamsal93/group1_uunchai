@@ -3,75 +3,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package database;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.*;
+import java.sql.SQLException;
 
-/**
- *
- * @author Acer
- */
-public class MySqlConnection implements Database {
+public class MySqlConnection {
 
-    @Override
-    public Connection openConnection() {
-       try{
-           String username = "root";
-           String password = "653511";
-           String database = "connection";
-           Connection connection;
-           connection = DriverManager.getConnection(
-           "jdbc:mysql://localhost:3306/" +database, username, password);
-           if (connection == null){
-               System.out.print("Connection unsuccessfull");
-           }else{
-               System.out.println("Connection successful");
-           }
-           
-           return connection;        
-       } catch (SQLException e){
-           System.out.println(e);
-           return null;
-       } 
-    }
+    private static final String URL = "jdbc:mysql://localhost:3306/airticket";
+    private static final String USER = "root";
+    private static final String PASSWORD = "653511";
 
-    @Override
-    public void closeConnection(Connection conn) {
-        try{
-            if(conn != null && !conn.isClosed()){
-                conn.close();
-                System.out.println("Connection close");
-            }
-        }catch(SQLException e){
-            System.out.println(e);
+    public static Connection getConnection() {
+        Connection conn = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("Database Connected Successfully!");
+        } catch (ClassNotFoundException e) {
+            System.out.println("MySQL Driver Not Found!");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Database Connection Failed!");
+            e.printStackTrace();
         }
+        return conn;
     }
-
-    @Override
-    public ResultSet runQuery(Connection conn, String query) {
-        try{
-        Statement stmp = conn.createStatement();
-        ResultSet result = stmp.executeQuery(query);
-        return result;
-        
-        }catch(SQLException e){
-        System.out.print(e);
-        return null;
-        }
-    }
-
-    @Override
-    public int executeUpdate(Connection conn, String query) {
-       try{
-           Statement stamp = conn.createStatement();
-           int result = stamp.executeUpdate(query);
-           return result;
-           
-       }catch(SQLException e){
-           System.out.print(e);
-           return -1;
-       }
-    }
-    
 }
