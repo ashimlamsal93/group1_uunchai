@@ -3,50 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package group1_uunchai;
-import database.Database;
 
-import database.MySqlConnection;
-
-
-
-/**
-
- *
-
- * @author User
-
- */
+import view.Reset_Password;
 
 public class Group1_Uunchai {
 
-
-
-    /**
-
-     * @param args the command line arguments
-
-     */
-
     public static void main(String[] args) {
-
-        // TODO code application logic here
-
-       Database db = new MySqlConnection();
-
-       if(db.openConnection() !=null){
-
-           System.out.println("Connectioon succesful");
-
-         
-
-       }else{
-
-           System.out.println("Not successful");
-
-       }
-
+        java.awt.EventQueue.invokeLater(() -> {
+            new Reset_Password().setVisible(true);
+        });
     }
-
-    
-
 }
