@@ -3,15 +3,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package database;
+
 import java.sql.*;
 
+
+
 /**
+
  *
- * @author Acer
+
+ * @author User
+
  */
+
 public interface Database {
+
     Connection openConnection();
+
     void closeConnection(Connection conn);
+
     ResultSet runQuery(Connection conn, String query);
-    int executeUpdate(Connection conn, String query);
+
+    int excecuteUpdate(Connection conn, String query);
+
+    
+
 }
+

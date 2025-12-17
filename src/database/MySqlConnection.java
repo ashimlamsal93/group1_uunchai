@@ -4,74 +4,60 @@
  */
 package database;
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.DriverManager;  
 import java.sql.ResultSet;
-import java.sql.*;
-
+import java.sql.SQLException;
+import java.sql.Statement;
 /**
  *
- * @author Acer
+ * @author A plus
  */
 public class MySqlConnection implements Database {
 
+    private final String url = "jdbc:mysql://localhost:3306/new_registration";
+    private final String user = "root";
+    private final String password = "Suneel@2004";
+
     @Override
     public Connection openConnection() {
-       try{
-           String username = "root";
-           String password = "653511";
-           String database = "connection";
-           Connection connection;
-           connection = DriverManager.getConnection(
-           "jdbc:mysql://localhost:3306/" +database, username, password);
-           if (connection == null){
-               System.out.print("Connection unsuccessfull");
-           }else{
-               System.out.println("Connection successful");
-           }
-           
-           return connection;        
-       } catch (SQLException e){
-           System.out.println(e);
-           return null;
-       } 
+        try {
+            return DriverManager.getConnection(url, user, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public void closeConnection(Connection conn) {
-        try{
-            if(conn != null && !conn.isClosed()){
+        try {
+            if (conn != null && !conn.isClosed()) {
                 conn.close();
-                System.out.println("Connection close");
             }
-        }catch(SQLException e){
-            System.out.println(e);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public ResultSet runQuery(Connection conn, String query) {
-        try{
-        Statement stmp = conn.createStatement();
-        ResultSet result = stmp.executeQuery(query);
-        return result;
-        
-        }catch(SQLException e){
-        System.out.print(e);
-        return null;
+        try {
+            Statement stmt = conn.createStatement();
+            return stmt.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
     @Override
-    public int executeUpdate(Connection conn, String query) {
-       try{
-           Statement stamp = conn.createStatement();
-           int result = stamp.executeUpdate(query);
-           return result;
-           
-       }catch(SQLException e){
-           System.out.print(e);
-           return -1;
-       }
+    public int excecuteUpdate(Connection conn, String query) {
+        try {
+            Statement stmt = conn.createStatement();
+            return stmt.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
-    
 }

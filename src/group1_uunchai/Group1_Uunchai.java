@@ -1,52 +1,30 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package group1_uunchai;
+
+import controller.UserController;
 import database.Database;
-
 import database.MySqlConnection;
-
-
-
-/**
-
- *
-
- * @author User
-
- */
+import view.Registration;
 
 public class Group1_Uunchai {
 
-
-
-    /**
-
-     * @param args the command line arguments
-
-     */
-
     public static void main(String[] args) {
 
-        // TODO code application logic here
+        Registration reg = new Registration();
+        UserController userC = new UserController(reg);
+        userC.open();
+        // Optional: open registration form
+        // Registration register = new Registration();
+//    }
+//}
 
-       Database db = new MySqlConnection();
 
-       if(db.openConnection() !=null){
 
-           System.out.println("Connectioon succesful");
 
-         
-
-       }else{
-
-           System.out.println("Not successful");
-
-       }
-
+//    public static void main(String[] args) {
+      
     }
-
-    
-
 }
