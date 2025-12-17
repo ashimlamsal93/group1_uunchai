@@ -2,5 +2,10 @@
 
 *nbproject/private
 
+
 /src/database/
 group1_uunchai/src/database/
+
+/dist/
+src/database/
+
