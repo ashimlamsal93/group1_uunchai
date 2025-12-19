@@ -4,17 +4,30 @@
  */
 package group1_uunchai;
 
-/**
- *
- * @author Acer
- */
+
+import controller.UserController;
+import database.Database;
+import database.MySqlConnection;
+import view.Registration;
+
+
+
 public class Group1_Uunchai {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
-    }
-    
-}
+
+
+        Registration reg = new Registration();
+        UserController userC = new UserController(reg);
+        userC.open();
+    }}
+        // Optional: open registration form
+        // Registration register = new Registration();
+//    }
+//}
+
+
+
+
+//    public static void main(String[] args) {
+      
