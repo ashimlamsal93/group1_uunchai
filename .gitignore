@@ -1,6 +1,5 @@
 /build/
-
 *nbproject/private
-
-/src/database/
 /dist/
+/src/database/
+
