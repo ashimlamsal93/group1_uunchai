@@ -5,6 +5,7 @@
 package view;
 
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Acer
@@ -42,6 +43,10 @@ public class Reset_Password extends javax.swing.JFrame {
         backBtn = new javax.swing.JButton();
         newPassField = new javax.swing.JPasswordField();
         confirmPassField = new javax.swing.JPasswordField();
+        jLabel5 = new javax.swing.JLabel();
+        SecurityQuestion = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        SecurityAnswer = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,15 +72,15 @@ public class Reset_Password extends javax.swing.JFrame {
 
         jLabel2.setText("Email:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(100, 100, 40, 20);
+        jLabel2.setBounds(100, 80, 40, 20);
 
         jLabel3.setText("New Password:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(50, 140, 100, 20);
+        jLabel3.setBounds(60, 200, 100, 20);
 
         jLabel4.setText("Conform password:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(30, 180, 110, 20);
+        jLabel4.setBounds(30, 240, 110, 20);
 
         emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +88,7 @@ public class Reset_Password extends javax.swing.JFrame {
             }
         });
         jPanel1.add(emailField);
-        emailField.setBounds(150, 100, 160, 22);
+        emailField.setBounds(150, 80, 170, 22);
 
         resetBtn.setBackground(new java.awt.Color(51, 153, 255));
         resetBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -94,31 +99,45 @@ public class Reset_Password extends javax.swing.JFrame {
             }
         });
         jPanel1.add(resetBtn);
-        resetBtn.setBounds(90, 230, 200, 23);
+        resetBtn.setBounds(90, 280, 200, 23);
 
         backBtn.setBackground(new java.awt.Color(51, 153, 255));
         backBtn.setText("Back to Login");
         jPanel1.add(backBtn);
-        backBtn.setBounds(130, 280, 110, 23);
+        backBtn.setBounds(130, 340, 110, 23);
         jPanel1.add(newPassField);
-        newPassField.setBounds(150, 140, 160, 22);
+        newPassField.setBounds(150, 200, 170, 22);
         jPanel1.add(confirmPassField);
-        confirmPassField.setBounds(150, 180, 160, 22);
+        confirmPassField.setBounds(150, 240, 170, 22);
+
+        jLabel5.setText("Security Question:");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(40, 120, 100, 16);
+        jPanel1.add(SecurityQuestion);
+        SecurityQuestion.setBounds(150, 120, 170, 22);
+
+        jLabel7.setText("Answer:");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(90, 160, 50, 16);
+        jPanel1.add(SecurityAnswer);
+        SecurityAnswer.setBounds(150, 160, 170, 22);
 
         jPanel3.add(jPanel1);
-        jPanel1.setBounds(210, 100, 360, 350);
+        jPanel1.setBounds(210, 90, 360, 400);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 784, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE))
         );
 
         pack();
@@ -136,7 +155,7 @@ public class Reset_Password extends javax.swing.JFrame {
     controller.ResetPasswordController rpc = new controller.ResetPasswordController();
     String result = rpc.resetPassword(email, newPass, confirmPass);
 
-    javax.swing.JOptionPane.showMessageDialog(this, result);
+    JOptionPane.showMessageDialog(this, result);
     }//GEN-LAST:event_resetBtnActionPerformed
 
     /**
@@ -165,6 +184,8 @@ public class Reset_Password extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField SecurityAnswer;
+    private javax.swing.JTextField SecurityQuestion;
     private javax.swing.JButton backBtn;
     private javax.swing.JPasswordField confirmPassField;
     private javax.swing.JTextField emailField;
@@ -172,7 +193,9 @@ public class Reset_Password extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JToolBar jToolBar1;

@@ -6,7 +6,9 @@ package view;
 
 import controller.UserController;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import model.User;
 
 /**
  *
@@ -15,7 +17,6 @@ import javax.swing.JPasswordField;
 public class Registration extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Registration.class.getName());
-    private JPasswordField password;
 
     /**
      * Creates new form register
@@ -83,7 +84,7 @@ public class Registration extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Password:");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(60, 230, 61, 20);
+        jLabel5.setBounds(60, 230, 80, 20);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Confirm Password:");
@@ -160,7 +161,7 @@ public class Registration extends javax.swing.JFrame {
         jLabel10.setBounds(170, 400, 30, 50);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(240, 70, 420, 450);
+        jPanel2.setBounds(170, 90, 420, 450);
 
         jToolBar1.setBackground(new java.awt.Color(51, 153, 255));
         jToolBar1.setBorder(null);
@@ -178,19 +179,18 @@ public class Registration extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerbtnActionPerformed
-       // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_registerbtnActionPerformed
 
     private void emailMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMouseDragged

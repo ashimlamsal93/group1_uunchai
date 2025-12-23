@@ -3,12 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
-
-import dao.UserDAO;
+import dao.ResetPasswordDao;
 
 public class ResetPasswordController {
 
-    private final UserDAO userDAO = new UserDAO();
+    private final ResetPasswordDao userDAO = new ResetPasswordDao();
 
     public String resetPassword(String email, String newPass, String confirmPass) {
 
