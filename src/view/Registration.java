@@ -60,6 +60,7 @@ public class Registration extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel1.setToolTipText("");
         jPanel1.setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(113, 171, 252));
