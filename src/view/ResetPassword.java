@@ -4,20 +4,21 @@
  */
 package view;
 
+import controller.ResetPasswordController;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 /**
  *
  * @author Acer
  */
-public class Reset_Password extends javax.swing.JFrame {
+public class ResetPassword extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Reset_Password.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ResetPassword.class.getName());
 
     /**
      * Creates new form reset_password
      */
-    public Reset_Password() {
+    public ResetPassword() {
         initComponents();
     }
     /**
@@ -44,9 +45,9 @@ public class Reset_Password extends javax.swing.JFrame {
         newPassField = new javax.swing.JPasswordField();
         confirmPassField = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
-        SecurityQuestion = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         SecurityAnswer = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,14 +114,24 @@ public class Reset_Password extends javax.swing.JFrame {
         jLabel5.setText("Security Question:");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(40, 120, 100, 16);
-        jPanel1.add(SecurityQuestion);
-        SecurityQuestion.setBounds(150, 120, 170, 22);
 
         jLabel7.setText("Answer:");
         jPanel1.add(jLabel7);
         jLabel7.setBounds(90, 160, 50, 16);
         jPanel1.add(SecurityAnswer);
         SecurityAnswer.setBounds(150, 160, 170, 22);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(
+            new String[] {
+                "Select a security question",
+                "What is your favorite place?",
+                "What is your pet's name?",
+                "What was your first school?",
+                "What is your mother's maiden name?"
+            }
+        ));
+        jPanel1.add(jComboBox1);
+        jComboBox1.setBounds(150, 120, 170, 20);
 
         jPanel3.add(jPanel1);
         jPanel1.setBounds(210, 90, 360, 400);
@@ -148,14 +159,18 @@ public class Reset_Password extends javax.swing.JFrame {
     }//GEN-LAST:event_emailFieldActionPerformed
 
     private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
-    String email = emailField.getText();
-    String newPass = newPassField.getText();
-    String confirmPass = confirmPassField.getText();
-
-    controller.ResetPasswordController rpc = new controller.ResetPasswordController();
-    String result = rpc.resetPassword(email, newPass, confirmPass);
-
-    JOptionPane.showMessageDialog(this, result);
+    String email = emailField.getText().trim();  // Your email field
+    String securityAnswer = SecurityAnswer.getText().trim();  // Your answer field
+    String newPassword = new String(newPassField.getPassword());  // Your new password field
+    String confirmPassword = new String(confirmPassField.getPassword());  // Your confirm field
+    
+    ResetPasswordController controller = new ResetPasswordController();
+    boolean success = controller.handlePasswordReset(email, securityAnswer, newPassword, confirmPassword);
+    
+    if (success) {
+        this.dispose();
+        new Login().setVisible(true);
+    }
     }//GEN-LAST:event_resetBtnActionPerformed
 
     /**
@@ -180,15 +195,15 @@ public class Reset_Password extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Reset_Password().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ResetPassword().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField SecurityAnswer;
-    private javax.swing.JTextField SecurityQuestion;
     private javax.swing.JButton backBtn;
     private javax.swing.JPasswordField confirmPassField;
     private javax.swing.JTextField emailField;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -3,36 +3,60 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
-import dao.ResetPasswordDao;
+
+
+import dao.UserDao;
+import javax.swing.JOptionPane;
 
 public class ResetPasswordController {
-
-    private final ResetPasswordDao userDAO = new ResetPasswordDao();
-
-    public String resetPassword(String email, String newPass, String confirmPass) {
-
-        // Check empty fields
-        if (email.isEmpty() || newPass.isEmpty() || confirmPass.isEmpty()) {
-            return "Please fill all fields.";
+    private UserDao userDao;
+    
+    public ResetPasswordController() {
+        this.userDao = new UserDao();
+    }
+    
+    // Step 1: Get security question for email
+    public String getSecurityQuestion(String email) {
+        if (email.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter your email!", "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
         }
-
-        // Check passwords match
-        if (!newPass.equals(confirmPass)) {
-            return "Passwords do not match!";
+        
+        if (!userDao.emailExists(email)) {
+            JOptionPane.showMessageDialog(null, "Email not found!", "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
         }
-
-        // Check email exists
-        if (!userDAO.emailExists(email)) {
-            return "Email not found!";
+        
+        return userDao.getSecurityQuestion(email);
+    }
+    
+    // Step 2: Verify security answer and reset password
+    public boolean handlePasswordReset(String email, String securityAnswer, String newPassword, String confirmPassword) {
+        // Validate inputs
+        if (email.isEmpty() || securityAnswer.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill in all fields!", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
-
+        
+        // Check if passwords match
+        if (!newPassword.equals(confirmPassword)) {
+            JOptionPane.showMessageDialog(null, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        // Verify security answer
+        if (!userDao.verifySecurityAnswer(email, securityAnswer)) {
+            JOptionPane.showMessageDialog(null, "Incorrect security answer!", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
         // Update password
-        boolean updated = userDAO.updatePassword(email, newPass);
-
-        if (updated) {
-            return "Password updated successfully.";
+        if (userDao.updatePassword(email, newPassword)) {
+            JOptionPane.showMessageDialog(null, "Password reset successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            return true;
         } else {
-            return "Error updating password.";
+            JOptionPane.showMessageDialog(null, "Password reset failed!", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
     }
 }

@@ -4,68 +4,145 @@
  */
 
 package dao;
-import database.Database;
-import database.MySqlConnection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import model.UserModel;
+import Database.MySqlConnection;  // Fixed package name
+import model.User;
+import java.sql.*;
 
 public class UserDao {
 
-    private final Database database;
-
-    public UserDao() {
-        this.database = new MySqlConnection();
-    }
-
-    // ✅ REGISTER USER
-    public boolean register(UserModel user) {
-        Connection conn = database.openConnection();
-        String sql = "INSERT INTO users (username, email, password, contact) VALUES (?, ?, ?, ?)";
-
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, user.getUsername());
-            ps.setString(2, user.getEmail());
-            ps.setString(3, user.getPassword());
-            ps.setString(4, user.getContact()); // contact as VARCHAR
-
-            return ps.executeUpdate() > 0;
-
+    // Register new user WITH security question
+    public boolean registerUser(User user) {
+        String query = "INSERT INTO users (username, email, password, phone, role, SecurityQuestion, SecurityAnswer) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = MySqlConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(query)) {
+           
+            pst.setString(1, user.getName());
+            pst.setString(2, user.getEmail());
+            pst.setString(3, user.getPassword());
+            pst.setString(4, user.getPhone());
+            pst.setString(5, user.getRole());
+            pst.setString(6, user.getSecurityQuestion());
+            pst.setString(7, user.getSecurityAnswer());
+           
+            int result = pst.executeUpdate();
+            return result > 0;
+           
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        } finally {
-            database.closeConnection(conn);
+        }
+    }
+   
+    // Login user
+    public User loginUser(String email, String password) {
+        String query = "SELECT * FROM users WHERE email = ? AND password = ?";
+        try (Connection conn = MySqlConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(query)) {
+           
+            pst.setString(1, email);
+            pst.setString(2, password);
+           
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setPhone(rs.getString("phone"));
+                user.setRole(rs.getString("role"));
+                user.setSecurityQuestion(rs.getString("SecurityQuestion"));
+                user.setSecurityAnswer(rs.getString("SecurityAnswer"));
+                return user;
+            }
+           
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+   
+    // Check if email exists
+    public boolean emailExists(String email) {
+        String query = "SELECT * FROM users WHERE email = ?";
+        try (Connection conn = MySqlConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(query)) {
+           
+            pst.setString(1, email);
+            ResultSet rs = pst.executeQuery();
+            return rs.next();
+           
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+   
+    // Get security question by email
+    public String getSecurityQuestion(String email) {
+        String query = "SELECT SecurityQuestion FROM users WHERE email = ?";
+        try (Connection conn = MySqlConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(query)) {
+           
+            pst.setString(1, email);
+            ResultSet rs = pst.executeQuery();
+           
+            if (rs.next()) {
+                return rs.getString("SecurityQuestion");
+            }
+           
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+   
+    // Verify security answer
+    public boolean verifySecurityAnswer(String email, String answer) {
+        String query = "SELECT * FROM users WHERE email = ? AND SecurityAnswer = ?";
+        try (Connection conn = MySqlConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(query)) {
+           
+            pst.setString(1, email);
+            pst.setString(2, answer);
+           
+            ResultSet rs = pst.executeQuery();
+            return rs.next();
+           
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+   
+    // Update password
+    public boolean updatePassword(String email, String newPassword) {
+        String query = "UPDATE users SET password = ? WHERE email = ?";
+        try (Connection conn = MySqlConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(query)) {
+           
+            pst.setString(1, newPassword);
+            pst.setString(2, email);
+           
+            int result = pst.executeUpdate();
+            return result > 0;
+           
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
-    // ✅ CHECK USER EXISTS
-   public boolean exists(UserModel usermodel) {
-    Connection conn = database.openConnection();
-
-    if (conn == null) {
-        System.err.println("Connection is null. Check DB credentials.");
-        return false;
+    // === ADD THIS METHOD ===
+    public ResultSet getAllUsers() {
+        String query = "SELECT id, username, email, phone, role FROM users ORDER BY id";
+        try {
+            Connection conn = MySqlConnection.getConnection();
+            PreparedStatement pst = conn.prepareStatement(query);
+            return pst.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-
-    String query = "SELECT 1 FROM users WHERE username = ? OR email = ?";
-
-    try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-        pstmt.setString(1, usermodel.getUsername());
-        pstmt.setString(2, usermodel.getEmail());
-
-        ResultSet rs = pstmt.executeQuery();
-        return rs.next();
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return false;
-    } finally {
-        database.closeConnection(conn);
-    }
-   }
 }

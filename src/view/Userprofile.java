@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-
+import javax.swing.ImageIcon;
+import java.awt.Image;
 /**
  *
  * @author DELL
@@ -12,11 +13,9 @@ public class Userprofile extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Userprofile.class.getName());
 
-    /**
-     * Creates new form Userprofile
-     */
     public Userprofile() {
         initComponents();
+        setProfileImage(); // Call it in constructor if you want
     }
 
     /**
@@ -48,32 +47,32 @@ public class Userprofile extends javax.swing.JFrame {
 
         jLabel1.setText("Username:");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(250, 290, 80, 22);
+        jLabel1.setBounds(250, 290, 80, 16);
 
         jLabel2.setText("Iron Man");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(440, 290, 100, 22);
+        jLabel2.setBounds(440, 290, 100, 16);
 
         jLabel3.setText("Contact:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(250, 330, 70, 22);
+        jLabel3.setBounds(250, 330, 70, 16);
 
         jLabel4.setText("9812345678");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(440, 330, 100, 22);
+        jLabel4.setBounds(440, 330, 100, 16);
 
         jLabel5.setText("E-mail:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(250, 380, 47, 22);
+        jLabel5.setBounds(250, 380, 37, 16);
 
         jLabel6.setText("Uunchaigroup123@gmail.com");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(440, 380, 220, 22);
+        jLabel6.setBounds(440, 380, 220, 16);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel7.setText("User Profile");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(330, 100, 90, 22);
+        jLabel7.setBounds(330, 30, 90, 22);
 
         jLabel8.setBackground(new java.awt.Color(51, 51, 255));
         jLabel8.setText("  Save");
@@ -81,7 +80,7 @@ public class Userprofile extends javax.swing.JFrame {
         jPanel1.add(jLabel8);
         jLabel8.setBounds(480, 450, 60, 40);
         jPanel1.add(jSeparator1);
-        jSeparator1.setBounds(260, 300, 50, 10);
+        jSeparator1.setBounds(260, 300, 0, 3);
 
         jLabel9.setBackground(new java.awt.Color(51, 51, 255));
         jLabel9.setText("    Exit");
@@ -93,7 +92,7 @@ public class Userprofile extends javax.swing.JFrame {
         lnlProfilePic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons8-profile-30.png"))); // NOI18N
         lnlProfilePic.setPreferredSize(new java.awt.Dimension(120, 120));
         jPanel1.add(lnlProfilePic);
-        lnlProfilePic.setBounds(300, 140, 160, 160);
+        lnlProfilePic.setBounds(290, 80, 160, 160);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,41 +100,16 @@ public class Userprofile extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Userprofile().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -151,16 +125,28 @@ public class Userprofile extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lnlProfilePic;
     // End of variables declaration//GEN-END:variables
-}
+
 private void setProfileImage() {
-    ImageIcon icon = new ImageIcon(getClass().getResource("/images/profile.png"));
-    Image img = icon.getImage();
+        try {
+            ImageIcon icon = new ImageIcon(getClass().getResource("/images/profile.png"));
+            Image img = icon.getImage();
 
-    Image scaledImg = img.getScaledInstance(
-            lblProfilePic.getWidth(),
-            lblProfilePic.getHeight(),
-            Image.SCALE_SMOOTH
-    );
+            Image scaledImg = img.getScaledInstance(
+                    lnlProfilePic.getWidth(),
+                    lnlProfilePic.getHeight(),
+                    Image.SCALE_SMOOTH
+            );
 
-    lblProfilePic.setIcon(new ImageIcon(scaledImg));
+            lnlProfilePic.setIcon(new ImageIcon(scaledImg));
+        } catch (Exception e) {
+            logger.log(java.util.logging.Level.WARNING, "Could not load profile image", e);
+        }
+    }
+
+    public static void main(String args[]) {
+        // ... your main method code ...
+    }
+
+    // Variables declaration - do not modify                     
 }
+   

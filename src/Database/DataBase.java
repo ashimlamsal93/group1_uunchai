@@ -3,7 +3,7 @@ package Database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
-public interface DataBase {
+public interface Database {
     Connection openConnection();
     void closeConnection(Connection conn);
     ResultSet runQuery(Connection conn, String query);

@@ -4,7 +4,7 @@
  */
 package view;
 
-import controller.UserController;
+import controller.RegisterController;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -44,7 +44,7 @@ public class Registration extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
-        contact = new javax.swing.JTextField();
+        phone = new javax.swing.JTextField();
         email = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         registerbtn = new javax.swing.JButton();
@@ -53,6 +53,10 @@ public class Registration extends javax.swing.JFrame {
         password1 = new javax.swing.JPasswordField();
         fbicon = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        SecurityAnswer = new javax.swing.JTextField();
+        SecurityQuestion = new javax.swing.JComboBox<>();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -69,27 +73,27 @@ public class Registration extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Username:");
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(70, 80, 70, 20);
+        jLabel2.setBounds(60, 50, 70, 20);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Contact:");
+        jLabel3.setText("Phone:");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(80, 130, 60, 20);
+        jLabel3.setBounds(70, 100, 60, 20);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Email:");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(90, 180, 50, 16);
+        jLabel4.setBounds(80, 150, 50, 16);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Password:");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(60, 230, 80, 20);
+        jLabel5.setBounds(70, 270, 80, 20);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Confirm Password:");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(10, 270, 120, 30);
+        jLabel6.setBounds(20, 310, 120, 30);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("Registration");
@@ -99,7 +103,7 @@ public class Registration extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Already have an account?  ");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(110, 350, 170, 20);
+        jLabel1.setBounds(110, 390, 170, 20);
 
         username.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -107,16 +111,16 @@ public class Registration extends javax.swing.JFrame {
             }
         });
         jPanel2.add(username);
-        username.setBounds(150, 70, 180, 30);
+        username.setBounds(150, 50, 180, 30);
 
-        contact.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        phone.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                contactMouseDragged(evt);
+                phoneMouseDragged(evt);
             }
         });
-        contact.addActionListener(this::contactActionPerformed);
-        jPanel2.add(contact);
-        contact.setBounds(150, 120, 180, 30);
+        phone.addActionListener(this::phoneActionPerformed);
+        jPanel2.add(phone);
+        phone.setBounds(150, 100, 180, 30);
 
         email.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -124,12 +128,12 @@ public class Registration extends javax.swing.JFrame {
             }
         });
         jPanel2.add(email);
-        email.setBounds(150, 170, 180, 30);
+        email.setBounds(150, 150, 180, 30);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Login");
         jPanel2.add(jLabel8);
-        jLabel8.setBounds(270, 350, 40, 20);
+        jLabel8.setBounds(280, 390, 40, 20);
 
         registerbtn.setBackground(new java.awt.Color(51, 153, 255));
         registerbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -137,31 +141,56 @@ public class Registration extends javax.swing.JFrame {
         registerbtn.setBorder(null);
         registerbtn.addActionListener(this::registerbtnActionPerformed);
         jPanel2.add(registerbtn);
-        registerbtn.setBounds(100, 320, 240, 20);
+        registerbtn.setBounds(100, 360, 240, 20);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setText("or");
         jPanel2.add(jLabel9);
-        jLabel9.setBounds(210, 380, 20, 20);
+        jLabel9.setBounds(200, 420, 20, 20);
 
         confirmpassword.addActionListener(this::confirmpasswordActionPerformed);
         jPanel2.add(confirmpassword);
-        confirmpassword.setBounds(150, 270, 180, 30);
+        confirmpassword.setBounds(150, 310, 180, 30);
 
         password1.addActionListener(this::password1ActionPerformed);
         jPanel2.add(password1);
-        password1.setBounds(150, 222, 180, 30);
+        password1.setBounds(150, 270, 180, 30);
 
         fbicon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-facebook-30.png"))); // NOI18N
         jPanel2.add(fbicon);
-        fbicon.setBounds(230, 410, 40, 30);
+        fbicon.setBounds(240, 450, 40, 30);
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-google-30.png"))); // NOI18N
         jPanel2.add(jLabel10);
-        jLabel10.setBounds(170, 400, 30, 50);
+        jLabel10.setBounds(150, 440, 30, 50);
+
+        jLabel11.setText("SecurityQuestion:");
+        jPanel2.add(jLabel11);
+        jLabel11.setBounds(40, 190, 100, 16);
+
+        jLabel12.setText("SecurityAnswer:");
+        jPanel2.add(jLabel12);
+        jLabel12.setBounds(40, 230, 100, 16);
+
+        SecurityAnswer.addActionListener(this::SecurityAnswerActionPerformed);
+        jPanel2.add(SecurityAnswer);
+        SecurityAnswer.setBounds(150, 230, 180, 30);
+
+        SecurityQuestion.setModel(new javax.swing.DefaultComboBoxModel<>(
+            new String[] {
+                "Select a security question",
+                "What is your favorite place?",
+                "What is your pet's name?",
+                "What was your first school?",
+                "What is your mother's maiden name?"
+            }
+        ));
+        SecurityQuestion.addActionListener(this::SecurityQuestionActionPerformed);
+        jPanel2.add(SecurityQuestion);
+        SecurityQuestion.setBounds(150, 190, 180, 30);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(170, 90, 420, 450);
+        jPanel2.setBounds(170, 60, 420, 530);
 
         jToolBar1.setBackground(new java.awt.Color(51, 153, 255));
         jToolBar1.setBorder(null);
@@ -190,20 +219,39 @@ public class Registration extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerbtnActionPerformed
-
+    String name = username.getText().trim();  // Replace with your username field name
+    String contact = phone.getText().trim();  // Replace with your contact field name
+    String emailId = email.getText().trim();  // Replace with your email field name
+    String securityQuestion =  SecurityQuestion.getSelectedItem().toString();  // Your combo box
+    String securityAnswer = SecurityAnswer.getText().trim();  // Your security answer field
+    String password = new String(password1.getPassword());
+    String confirmPassword = new String(confirmpassword.getPassword());
+    // Check if passwords match
+    if (!password.equals(confirmPassword)) {
+        JOptionPane.showMessageDialog(this, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    RegisterController controller = new RegisterController();
+    boolean success = controller.handleRegistration(name, emailId, password, contact, securityQuestion, securityAnswer);
+    
+    if (success) {
+        this.dispose();
+        new Login().setVisible(true);
+    }
     }//GEN-LAST:event_registerbtnActionPerformed
 
     private void emailMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMouseDragged
         // TODO add your handling code here:
     }//GEN-LAST:event_emailMouseDragged
 
-    private void contactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactActionPerformed
+    private void phoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_contactActionPerformed
+    }//GEN-LAST:event_phoneActionPerformed
 
-    private void contactMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contactMouseDragged
+    private void phoneMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_phoneMouseDragged
         // TODO add your handling code here:
-    }//GEN-LAST:event_contactMouseDragged
+    }//GEN-LAST:event_phoneMouseDragged
 
     private void usernameMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameMouseDragged
         // TODO add your handling code here:
@@ -216,6 +264,14 @@ public class Registration extends javax.swing.JFrame {
     private void password1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_password1ActionPerformed
+
+    private void SecurityAnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SecurityAnswerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SecurityAnswerActionPerformed
+
+    private void SecurityQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SecurityQuestionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SecurityQuestionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,13 +299,16 @@ public class Registration extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField SecurityAnswer;
+    private javax.swing.JComboBox<String> SecurityQuestion;
     private javax.swing.JLabel applogo;
     private javax.swing.JPasswordField confirmpassword;
-    private javax.swing.JTextField contact;
     private javax.swing.JTextField email;
     private javax.swing.JLabel fbicon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -264,6 +323,7 @@ public class Registration extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JPasswordField password1;
+    private javax.swing.JTextField phone;
     private javax.swing.JButton registerbtn;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
@@ -305,7 +365,7 @@ public class Registration extends javax.swing.JFrame {
      * @return The contact JTextField.
      */
     public javax.swing.JTextField getContactField(){
-        return contact;
+        return phone;
     }
 
   
@@ -317,7 +377,7 @@ public class Registration extends javax.swing.JFrame {
    public void clearForm() {
     username.setText("");
     email.setText("");
-    contact.setText("");
+    phone.setText("");
     password1.setText("");
     confirmpassword.setText("");
 }
