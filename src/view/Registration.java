@@ -4,21 +4,16 @@
  */
 package view;
 
-import controller.UserController;
-import java.awt.event.ActionListener;
-import javax.swing.JPasswordField;
-
 /**
  *
- * @author A plus
+ * @author DELL
  */
 public class Registration extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Registration.class.getName());
-    private JPasswordField password;
 
     /**
-     * Creates new form register
+     * Creates new form Registration
      */
     public Registration() {
         initComponents();
@@ -33,189 +28,21 @@ public class Registration extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        username = new javax.swing.JTextField();
-        contact = new javax.swing.JTextField();
-        email = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        registerbtn = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        confirmpassword = new javax.swing.JPasswordField();
-        password1 = new javax.swing.JPasswordField();
-        fbicon = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jToolBar1 = new javax.swing.JToolBar();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        applogo = new javax.swing.JLabel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
-        jPanel1.setLayout(null);
-
-        jPanel2.setBackground(new java.awt.Color(113, 171, 252));
-        jPanel2.setLayout(null);
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Username:");
-        jPanel2.add(jLabel2);
-        jLabel2.setBounds(70, 80, 70, 20);
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Contact:");
-        jPanel2.add(jLabel3);
-        jLabel3.setBounds(80, 130, 60, 20);
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("Email:");
-        jPanel2.add(jLabel4);
-        jLabel4.setBounds(90, 180, 50, 16);
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Password:");
-        jPanel2.add(jLabel5);
-        jLabel5.setBounds(60, 230, 61, 20);
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("Confirm Password:");
-        jPanel2.add(jLabel6);
-        jLabel6.setBounds(10, 270, 120, 30);
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setText("Registration");
-        jPanel2.add(jLabel7);
-        jLabel7.setBounds(170, 20, 110, 25);
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Already have an account?  ");
-        jPanel2.add(jLabel1);
-        jLabel1.setBounds(110, 350, 170, 20);
-
-        username.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                usernameMouseDragged(evt);
-            }
-        });
-        jPanel2.add(username);
-        username.setBounds(150, 70, 180, 30);
-
-        contact.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                contactMouseDragged(evt);
-            }
-        });
-        contact.addActionListener(this::contactActionPerformed);
-        jPanel2.add(contact);
-        contact.setBounds(150, 120, 180, 30);
-
-        email.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                emailMouseDragged(evt);
-            }
-        });
-        jPanel2.add(email);
-        email.setBounds(150, 170, 180, 30);
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setText("Login");
-        jPanel2.add(jLabel8);
-        jLabel8.setBounds(270, 350, 40, 20);
-
-        registerbtn.setBackground(new java.awt.Color(51, 153, 255));
-        registerbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        registerbtn.setText("Register");
-        registerbtn.setBorder(null);
-        registerbtn.addActionListener(this::registerbtnActionPerformed);
-        jPanel2.add(registerbtn);
-        registerbtn.setBounds(100, 320, 240, 20);
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setText("or");
-        jPanel2.add(jLabel9);
-        jLabel9.setBounds(210, 380, 20, 20);
-
-        confirmpassword.addActionListener(this::confirmpasswordActionPerformed);
-        jPanel2.add(confirmpassword);
-        confirmpassword.setBounds(150, 270, 180, 30);
-
-        password1.addActionListener(this::password1ActionPerformed);
-        jPanel2.add(password1);
-        password1.setBounds(150, 222, 180, 30);
-
-        fbicon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-facebook-30.png"))); // NOI18N
-        jPanel2.add(fbicon);
-        fbicon.setBounds(230, 410, 40, 30);
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-google-30.png"))); // NOI18N
-        jPanel2.add(jLabel10);
-        jLabel10.setBounds(170, 400, 30, 50);
-
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(240, 70, 420, 450);
-
-        jToolBar1.setBackground(new java.awt.Color(51, 153, 255));
-        jToolBar1.setBorder(null);
-        jToolBar1.setRollover(true);
-        jToolBar1.add(jLabel23);
-        jToolBar1.add(jLabel24);
-
-        applogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo 1.2.png"))); // NOI18N
-        jToolBar1.add(applogo);
-
-        jPanel1.add(jToolBar1);
-        jToolBar1.setBounds(0, 0, 910, 50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void registerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerbtnActionPerformed
-       // TODO add your handling code here:
-        
-    }//GEN-LAST:event_registerbtnActionPerformed
-
-    private void emailMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMouseDragged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailMouseDragged
-
-    private void contactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_contactActionPerformed
-
-    private void contactMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contactMouseDragged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_contactMouseDragged
-
-    private void usernameMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameMouseDragged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usernameMouseDragged
-
-    private void confirmpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmpasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_confirmpasswordActionPerformed
-
-    private void password1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_password1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,84 +70,5 @@ public class Registration extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel applogo;
-    private javax.swing.JPasswordField confirmpassword;
-    private javax.swing.JTextField contact;
-    private javax.swing.JTextField email;
-    private javax.swing.JLabel fbicon;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JPasswordField password1;
-    private javax.swing.JButton registerbtn;
-    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
-/**
-     * @param listner
-     */
-    
-    public void addUserListner(ActionListener l){
-        registerbtn.addActionListener(l);
-    }
-    
-    public javax.swing.JPasswordField getPasswordField(){
-        return  password1;
-    }
-    
-    /**
-     * @return The email JTextField.
-     */
-    public javax.swing.JTextField getEmailField(){
-        return email;
-    }
-    
-    /**
-     * @return The username JTextField.
-     */
-    public javax.swing.JTextField getUsernameField(){
-        return username;
-    }
-
-    
-    /**
-     * @return The confirm password JPasswordField.
-     */
-    public javax.swing.JPasswordField getConfirmPasswordField(){
-        return  confirmpassword;
-    }
-    
-    /**
-     * @return The contact JTextField.
-     */
-    public javax.swing.JTextField getContactField(){
-        return contact;
-    }
-
-  
-
-    public String getCofirmPassword() {
-    return new String(confirmpassword.getPassword());
 }
-
-   public void clearForm() {
-    username.setText("");
-    email.setText("");
-    contact.setText("");
-    password1.setText("");
-    confirmpassword.setText("");
-}
-
-}
-
