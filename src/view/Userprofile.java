@@ -148,6 +148,55 @@ public class Userprofile extends javax.swing.JFrame {
         jPanel1.add(jPanel3);
         jPanel3.setBounds(220, 110, 520, 580);
 
+        jLabel1.setText("Username:");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(250, 290, 80, 22);
+
+        jLabel2.setText("Iron Man");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(440, 290, 100, 22);
+
+        jLabel3.setText("Contact:");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(250, 330, 70, 22);
+
+        jLabel4.setText("9812345678");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(440, 330, 100, 22);
+
+        jLabel5.setText("E-mail:");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(250, 380, 47, 22);
+
+        jLabel6.setText("Uunchaigroup123@gmail.com");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(440, 380, 220, 22);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel7.setText("User Profile");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(330, 100, 90, 22);
+
+        jLabel8.setBackground(new java.awt.Color(51, 51, 255));
+        jLabel8.setText("  Save");
+        jLabel8.setOpaque(true);
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(480, 450, 60, 40);
+        jPanel1.add(jSeparator1);
+        jSeparator1.setBounds(260, 300, 50, 10);
+
+        jLabel9.setBackground(new java.awt.Color(51, 51, 255));
+        jLabel9.setText("    Exit");
+        jLabel9.setOpaque(true);
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(250, 452, 60, 40);
+
+        lnlProfilePic.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lnlProfilePic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons8-profile-30.png"))); // NOI18N
+        lnlProfilePic.setPreferredSize(new java.awt.Dimension(120, 120));
+        jPanel1.add(lnlProfilePic);
+        lnlProfilePic.setBounds(300, 140, 160, 160);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -211,4 +260,16 @@ public class Userprofile extends javax.swing.JFrame {
     private javax.swing.JButton savebtn;
     private javax.swing.JButton savebtn1;
     // End of variables declaration//GEN-END:variables
+}
+private void setProfileImage() {
+    ImageIcon icon = new ImageIcon(getClass().getResource("/images/profile.png"));
+    Image img = icon.getImage();
+
+    Image scaledImg = img.getScaledInstance(
+            lblProfilePic.getWidth(),
+            lblProfilePic.getHeight(),
+            Image.SCALE_SMOOTH
+    );
+
+    lblProfilePic.setIcon(new ImageIcon(scaledImg));
 }
