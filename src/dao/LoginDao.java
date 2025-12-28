@@ -5,7 +5,6 @@ import Database.MySqlConnection;
 import model.UserModel;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class LoginDao {
     private DataBase db;
@@ -19,22 +18,47 @@ public class LoginDao {
         try {
             conn = db.openConnection();
             if (conn == null) {
+                System.err.println("❌ Database connection failed");
                 return null;
             }
             
-            String query = "SELECT * FROM users WHERE email = '" + email + "' AND password = '" + password + "'";
+            // Check if users table exists
+            String checkTableQuery = "SHOW TABLES LIKE 'users'";
+            ResultSet tables = db.runQuery(conn, checkTableQuery);
+            if (tables == null || !tables.next()) {
+                System.err.println("❌ Users table doesn't exist!");
+                return null;
+            }
+            
+            // Check table structure
+            String describeQuery = "DESCRIBE users";
+            ResultSet rsDesc = db.runQuery(conn, describeQuery);
+            System.out.println("📋 Users table structure:");
+            while (rsDesc != null && rsDesc.next()) {
+                System.out.println("  " + rsDesc.getString("Field") + " : " + rsDesc.getString("Type"));
+            }
+            
+            // First try: check with email and password
+            String query = "SELECT email, password FROM users WHERE email = '" + email + "' AND password = '" + password + "'";
+            System.out.println("🔍 Executing query: " + query);
+            
             ResultSet rs = db.runQuery(conn, query);
             
             if (rs != null && rs.next()) {
                 UserModel user = new UserModel();
-                user.setUserId(rs.getInt("user_id"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
+                
+                System.out.println("✅ User found: " + user.getEmail());
                 return user;
             }
+            
+            System.out.println("❌ No user found with these credentials");
             return null;
             
-        } catch (SQLException e) {
+        } catch (Exception e) {
+            System.err.println("❌ Error in authenticateUser: " + e.getMessage());
+            e.printStackTrace();
             return null;
         } finally {
             if (conn != null) {
@@ -43,72 +67,14 @@ public class LoginDao {
         }
     }
     
-    public boolean checkEmailExists(String email) {
-        Connection conn = null;
-        try {
-            conn = db.openConnection();
-            String query = "SELECT COUNT(*) as count FROM users WHERE email = '" + email + "'";
-            ResultSet rs = db.runQuery(conn, query);
-            
-            if (rs != null && rs.next()) {
-                return rs.getInt("count") > 0;
-            }
-            return false;
-            
-        } catch (SQLException e) {
-            return false;
-        } finally {
-            if (conn != null) {
-                db.closeConnection(conn);
-            }
-        }
-    }
-    
-    public boolean registerUser(String email, String password) {
-        Connection conn = null;
-        try {
-            conn = db.openConnection();
-            
-            if (checkEmailExists(email)) {
-                return false;
-            }
-            
-            String query = String.format(
-                "INSERT INTO users (email, password) VALUES ('%s', '%s')",
-                email, password
-            );
-            
-            int rowsAffected = db.executeUpdate(conn, query);
-            return rowsAffected > 0;
-            
-        } catch (Exception e) {
-            return false;
-        } finally {
-            if (conn != null) {
-                db.closeConnection(conn);
-            }
-        }
-    }
-    
-    public boolean resetPassword(String email, String newPassword) {
-        Connection conn = null;
-        try {
-            conn = db.openConnection();
-            
-            if (!checkEmailExists(email)) {
-                return false;
-            }
-            
-            String query = "UPDATE users SET password = '" + newPassword + "' WHERE email = '" + email + "'";
-            int rowsAffected = db.executeUpdate(conn, query);
-            return rowsAffected > 0;
-            
-        } catch (Exception e) {
-            return false;
-        } finally {
-            if (conn != null) {
-                db.closeConnection(conn);
-            }
+    public void testConnection() {
+        System.out.println("Testing database connection...");
+        Connection conn = db.openConnection();
+        if (conn != null) {
+            System.out.println("✅ Database connection OK");
+            db.closeConnection(conn);
+        } else {
+            System.err.println("❌ Database connection FAILED");
         }
     }
 }

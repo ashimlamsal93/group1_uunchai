@@ -1,33 +1,42 @@
 package Database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class MySqlConnection implements DataBase {
     
+    // LOCALHOST SETTINGS
     private static final String URL = "jdbc:mysql://localhost:3306/project";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "W7301@jqir#"; // Change to your MySQL password
+    private static final String PASSWORD = "W7301@jqir#"; // Empty for localhost
     
     @Override
     public Connection openConnection() {
         try {
+            // Load driver
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            // Create connection
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            System.out.println("✅ Database connected: " + URL);
+            return conn;
             
-            if (connection != null && !connection.isClosed()) {
-                System.out.println("✓ Database connection established successfully");
-                return connection;
-            } else {
-                System.out.println("✗ Database connection failed");
-                return null;
-            }
-        } catch (Exception e) {
-            System.err.println("✗ Connection error: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.err.println("❌ MySQL Driver not found! Add mysql-connector-j.jar to libraries");
             e.printStackTrace();
+            return null;
+        } catch (SQLException e) {
+            System.err.println("❌ Database connection failed: " + e.getMessage());
+            e.printStackTrace();
+            
+            // Helpful error messages
+            if (e.getMessage().contains("Access denied")) {
+                System.err.println("💡 Check username/password in MySqlConnection.java");
+            } else if (e.getMessage().contains("Unknown database")) {
+                System.err.println("💡 Database 'project' doesn't exist. Create it first!");
+            } else if (e.getMessage().contains("Communications link failure")) {
+                System.err.println("💡 MySQL server is not running. Start MySQL service first!");
+            }
+            
             return null;
         }
     }
@@ -36,13 +45,14 @@ public class MySqlConnection implements DataBase {
     public ResultSet runQuery(Connection conn, String query) {
         try {
             if (conn == null || conn.isClosed()) {
-                System.err.println("✗ Connection is null or closed");
+                System.err.println("Connection is null or closed");
                 return null;
             }
-            Statement stmp = conn.createStatement();
-            return stmp.executeQuery(query);
-        } catch (Exception e) {
-            System.err.println("✗ Query error: " + e.getMessage());
+            Statement stmt = conn.createStatement();
+            return stmt.executeQuery(query);
+        } catch (SQLException e) {
+            System.err.println("Query failed: " + e.getMessage());
+            e.printStackTrace();
             return null;
         }
     }
@@ -51,13 +61,14 @@ public class MySqlConnection implements DataBase {
     public int executeUpdate(Connection conn, String query) {
         try {
             if (conn == null || conn.isClosed()) {
-                System.err.println("✗ Connection is null or closed");
+                System.err.println("Connection is null or closed");
                 return -1;
             }
-            Statement stmp = conn.createStatement();
-            return stmp.executeUpdate(query);
-        } catch (Exception e) {
-            System.err.println("✗ Update error: " + e.getMessage());
+            Statement stmt = conn.createStatement();
+            return stmt.executeUpdate(query);
+        } catch (SQLException e) {
+            System.err.println("Update failed: " + e.getMessage());
+            e.printStackTrace();
             return -1;
         }
     }
@@ -67,10 +78,11 @@ public class MySqlConnection implements DataBase {
         try {
             if (conn != null && !conn.isClosed()) {
                 conn.close();
-                System.out.println("✓ Database connection closed");
+                System.out.println("✅ Connection closed");
             }
-        } catch (Exception e) {
-            System.err.println("✗ Close error: " + e.getMessage());
+        } catch (SQLException e) {
+            System.err.println("Error closing connection: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
