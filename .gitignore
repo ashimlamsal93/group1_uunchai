@@ -2,6 +2,6 @@
 *nbproject/private
 /dist/
 /src/database/
-/src/database/
-/dist/
-
+mysql-connector-j-9.5.0
+build/
+test/
