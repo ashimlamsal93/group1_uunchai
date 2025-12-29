@@ -8,21 +8,21 @@ import database.Database;
 import database.MySqlConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import model.UserModel;
+import model.RegistrationModel;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 /**
  *
  * @author A plus
  */
-public class UserDao {
+public class RegistrationDao {
     private Database database;
     
-    public UserDao() {
+    public RegistrationDao() {
         this.database = new MySqlConnection();
     }
     
-    public boolean Register(UserModel user) {
+    public boolean Register(RegistrationModel user) {
         Connection conn = database.openConnection();
         String query = "INSERT INTO users (username,contact,email, password) VALUES (?, ?, ?, ?)";
         try {
@@ -44,16 +44,16 @@ public class UserDao {
     }
 }
     
-    public UserModel getUserByUsername(String username) {
+    public RegistrationModel getUserByUsername(String username) {
         Connection conn = database.openConnection();
         String query = "SELECT * FROM users WHERE username = ?";
-        UserModel user = null;
+        RegistrationModel user = null;
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, username);
            ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                user = new UserModel();
+                user = new RegistrationModel();
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setEmail(rs.getString("email"));
@@ -68,7 +68,7 @@ public class UserDao {
         return user;
     }
 
-    public boolean check(UserModel usermodel) {
+    public boolean check(RegistrationModel usermodel) {
     Connection conn = database.openConnection();
     String query = "SELECT 1 FROM users WHERE username = ? OR email = ?";
 

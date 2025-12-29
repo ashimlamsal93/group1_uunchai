@@ -5,13 +5,14 @@
 package group1_uunchai;
 
 
+//import controller.FlightController;
 import controller.FlightController;
-import controller.UserController;
-import database.Database;
-import database.MySqlConnection;
+import controller.PassengerController;
 import view.FlightBookingHistory;
-import view.Registration;
-
+//import controller.UserController;
+import view.PassengerForm;
+//import view.FlightBookingHistory;
+//import view.Registration;
 
 
 public class Group1_Uunchai {
@@ -37,3 +38,13 @@ public class Group1_Uunchai {
          FlightController fc = new FlightController(flight);
          flight.setVisible(true);
       }}
+
+
+    
+   
+//  PassengerForm myForm = new PassengerForm();
+//    new PassengerController(myForm);
+//    
+//    myForm.setVisible(true);
+//    myForm.setLocationRelativeTo(null);
+//}
