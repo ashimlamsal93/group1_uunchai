@@ -4,7 +4,7 @@
  */
 package model;
 
-public class UserModel {
+public class RegistrationModel {
     private int id;
     private String username;
     private String email;
@@ -13,9 +13,9 @@ public class UserModel {
     private String confirmPassword;
     
     // Constructors
-    public UserModel() {}
+    public RegistrationModel() {}
     
-    public UserModel(String username, String email, String contact, String password) {
+    public RegistrationModel(String username, String email, String contact, String password) {
         this.username = username;
         this.email = email;
         this.contact = contact;

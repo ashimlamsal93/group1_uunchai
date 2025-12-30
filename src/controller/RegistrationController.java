@@ -6,23 +6,23 @@
 package controller;
 
 
-import dao.UserDao;
+import dao.RegistrationDao;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import model.UserModel;
+import model.RegistrationModel;
 import view.Registration;
 /**
  *
  * @author A plus
  */
-public class UserController {
+public class RegistrationController {
 
-    private final UserDao userDao = new UserDao();
+    private final RegistrationDao userDao = new RegistrationDao();
     private final Registration userView;
 
-    public UserController(Registration userView) {
+    public RegistrationController(Registration userView) {
         this.userView = userView;
         userView.addUserListner(new RegisterListener());
     }
@@ -54,7 +54,7 @@ public class UserController {
                     return;
                 }
 
-                UserModel user = new UserModel(username, email, password, contact);
+                RegistrationModel user = new RegistrationModel(username, email, password, contact);
 
                 boolean exists = userDao.check(user);
                 if (exists) {

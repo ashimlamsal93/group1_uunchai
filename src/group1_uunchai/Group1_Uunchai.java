@@ -5,9 +5,8 @@
 package group1_uunchai;
 
 
-import view.Reset_Password;
 
-import controller.UserController;
+import controller.RegistrationController;
 import database.Database;
 import database.MySqlConnection;
 import view.Registration;
@@ -23,8 +22,10 @@ public class Group1_Uunchai {
 
 
         Registration reg = new Registration();
-        UserController userC = new UserController(reg);
+        RegistrationController userC = new RegistrationController(reg);
         userC.open();
+        
+        
         // Optional: open registration form
         // Registration register = new Registration();
 //    }

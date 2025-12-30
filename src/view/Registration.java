@@ -4,7 +4,7 @@
  */
 package view;
 
-import controller.UserController;
+import controller.RegistrationController;
 import java.awt.event.ActionListener;
 import javax.swing.JPasswordField;
 
