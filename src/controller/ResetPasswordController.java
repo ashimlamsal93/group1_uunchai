@@ -4,11 +4,11 @@
  */
 package controller;
 
-import dao.UserDAO;
+import dao.RegistrationDao;
 
 public class ResetPasswordController {
 
-    private final UserDAO userDAO = new UserDAO();
+    private final RegistrationDao userDAO = new RegistrationDao();
 
     public String resetPassword(String email, String newPass, String confirmPass) {
 

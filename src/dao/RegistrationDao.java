@@ -68,7 +68,7 @@ public class RegistrationDao {
         return user;
     }
 
-    public boolean check(RegistrationModel usermodel) {
+    public boolean check(RegistrationModel registrationmodel) {
     Connection conn = database.openConnection();
     String query = "SELECT 1 FROM users WHERE username = ? OR email = ?";
 
@@ -94,6 +94,3 @@ public class RegistrationDao {
 }
 
 }
-
-
-

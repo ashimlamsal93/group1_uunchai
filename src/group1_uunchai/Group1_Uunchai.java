@@ -12,6 +12,10 @@ package group1_uunchai;
 import controller.RegistrationController;
 import view.PassengerForm;
 //import view.FlightBookingHistory;
+
+import controller.RegistrationController;
+import database.Database;
+import database.MySqlConnection;
 import view.Registration;
 
 
@@ -19,6 +23,9 @@ public class Group1_Uunchai {
 
     public static void main(String[] args) {
 
+        // java.awt.EventQueue.invokeLater(() -> {
+        //     new Reset_Password().setVisible(true);
+        // });
 
        Registration reg = new Registration();
        UserController userC = new UserController(reg);
