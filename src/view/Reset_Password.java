@@ -99,7 +99,7 @@ public class Reset_Password extends javax.swing.JFrame {
         backBtn.setBackground(new java.awt.Color(51, 153, 255));
         backBtn.setText("Back to Login");
         jPanel1.add(backBtn);
-        backBtn.setBounds(130, 280, 120, 23);
+        backBtn.setBounds(130, 280, 110, 23);
         jPanel1.add(newPassField);
         newPassField.setBounds(150, 140, 160, 22);
         jPanel1.add(confirmPassField);
@@ -112,11 +112,13 @@ public class Reset_Password extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 784, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
         );
 
         pack();
