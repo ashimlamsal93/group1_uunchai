@@ -150,27 +150,27 @@ public class Userprofile extends javax.swing.JFrame {
 
         jLabel1.setText("Username:");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(250, 290, 80, 22);
+        jLabel1.setBounds(250, 290, 80, 16);
 
         jLabel2.setText("Iron Man");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(440, 290, 100, 22);
+        jLabel2.setBounds(440, 290, 100, 16);
 
         jLabel3.setText("Contact:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(250, 330, 70, 22);
+        jLabel3.setBounds(250, 330, 70, 16);
 
         jLabel4.setText("9812345678");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(440, 330, 100, 22);
+        jLabel4.setBounds(440, 330, 100, 16);
 
         jLabel5.setText("E-mail:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(250, 380, 47, 22);
+        jLabel5.setBounds(250, 380, 37, 16);
 
         jLabel6.setText("Uunchaigroup123@gmail.com");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(440, 380, 220, 22);
+        jLabel6.setBounds(440, 380, 220, 16);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel7.setText("User Profile");
@@ -181,9 +181,9 @@ public class Userprofile extends javax.swing.JFrame {
         jLabel8.setText("  Save");
         jLabel8.setOpaque(true);
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(480, 450, 60, 40);
+        jLabel8.setBounds(470, 450, 60, 40);
         jPanel1.add(jSeparator1);
-        jSeparator1.setBounds(260, 300, 50, 10);
+        jSeparator1.setBounds(260, 300, 0, 3);
 
         jLabel9.setBackground(new java.awt.Color(51, 51, 255));
         jLabel9.setText("    Exit");
@@ -201,11 +201,14 @@ public class Userprofile extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 971, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
         );
 
         pack();
