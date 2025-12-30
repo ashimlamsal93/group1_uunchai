@@ -6,13 +6,13 @@ package group1_uunchai;
 
 
 //import controller.FlightController;
-import controller.FlightController;
-import controller.PassengerController;
-import view.FlightBookingHistory;
-//import controller.UserController;
+// import controller.FlightController;
+// import controller.PassengerController;
+// import view.FlightBookingHistory;
+import controller.RegistrationController;
 import view.PassengerForm;
 //import view.FlightBookingHistory;
-//import view.Registration;
+import view.Registration;
 
 
 public class Group1_Uunchai {
@@ -20,10 +20,10 @@ public class Group1_Uunchai {
     public static void main(String[] args) {
 
 
-//        Registration reg = new Registration();
-//        UserController userC = new UserController(reg);
-//        userC.open();
-//    }}
+       Registration reg = new Registration();
+       UserController userC = new UserController(reg);
+       userC.open();
+   }}
         // Optional: open registration form
         // Registration register = new Registration();
 //    }
@@ -34,10 +34,10 @@ public class Group1_Uunchai {
 
 //    public static void main(String[] args) {
       
-         FlightBookingHistory flight = new FlightBookingHistory();
-         FlightController fc = new FlightController(flight);
-         flight.setVisible(true);
-      }}
+      //    FlightBookingHistory flight = new FlightBookingHistory();
+      //    FlightController fc = new FlightController(flight);
+      //    flight.setVisible(true);
+      // }}
 
 
     
