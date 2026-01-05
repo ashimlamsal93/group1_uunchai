@@ -8,8 +8,7 @@ import view.Login;
 import javax.swing.JOptionPane;
 
 public class LoginController {
-    private UserDao userDao;
-    
+    private final UserDao userDao;
     public LoginController() {
         this.userDao = new UserDao();
         System.out.println("LoginController created");
@@ -31,35 +30,31 @@ public class LoginController {
         System.out.println("Attempting database login...");
         User user = userDao.loginUser(email, password);
         
-        if (user != null) {
-            System.out.println("Login successful! User: " + user.getName() + ", Role: " + user.getRole());
-            JOptionPane.showMessageDialog(null, "Login Successful! Welcome " + user.getName(), "Success", JOptionPane.INFORMATION_MESSAGE);
-            
-            // Close current window
-            System.out.println("Closing login window...");
-            currentFrame.setVisible(false);
-            currentFrame.dispose();
-            
-            // Navigate based on role
-            try {
-                if ("ADMIN".equals(user.getRole())) {
-                    System.out.println("Creating AdminDashboard...");
-                    AdminDashboard dashboard = new AdminDashboard();
-                    dashboard.setVisible(true);
-                    currentFrame.dispose();
-                    System.out.println("AdminDashboard created and shown!");
-                } else {
-                    System.out.println("Creating UserDashboard...");
-                    UserDashboard dashboard = new UserDashboard();
-                    dashboard.setVisible(true);
-                    currentFrame.dispose();
-                    System.out.println("UserDashboard created and shown!");
-                }
-            } catch (Exception e) {
-                System.out.println("ERROR creating dashboard:");
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error opening dashboard: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
+       if (user != null) {
+    System.out.println("Login successful! User: " + user.getName() + ", Role: " + user.getRole());
+    JOptionPane.showMessageDialog(null, "Login Successful! Welcome " + user.getName(), "Success", JOptionPane.INFORMATION_MESSAGE);
+
+    // Close current window
+    System.out.println("Closing login window...");
+    currentFrame.setVisible(false);
+    currentFrame.dispose();
+
+    // Navigate based on role
+    try {
+        if ("ADMIN".equals(user.getRole())) {
+            System.out.println("Creating AdminDashboard...");
+            AdminDashboard dashboard = new AdminDashboard();
+            dashboard.setVisible(true);
+        } else {
+            System.out.println("Creating UserDashboard...");
+            UserDashboard dashboard = new UserDashboard(user);  // <-- FIXED: pass 'user'
+            dashboard.setVisible(true);
+        }
+    } catch (Exception e) {
+        System.out.println("ERROR creating dashboard:");
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error opening dashboard: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
             
         } else {
             System.out.println("Login failed: Invalid credentials");

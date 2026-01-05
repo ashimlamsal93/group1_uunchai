@@ -36,4 +36,17 @@ public class FlightDao {
             return false;
         }
     }
+public ResultSet searchFlights(String from, String to, String date) {
+    String query = "SELECT * FROM flights WHERE source = ? AND destination = ? AND DATE(departure_datetime) = ?";
+    try {
+        PreparedStatement pst = MySqlConnection.getConnection().prepareStatement(query);
+        pst.setString(1, from);
+        pst.setString(2, to);
+        pst.setString(3, date);
+        return pst.executeQuery();
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return null;
+    }
+}
 }

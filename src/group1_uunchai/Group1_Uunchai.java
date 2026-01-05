@@ -8,10 +8,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-/**
- * Main class for Air Ticket Booking System
- * Uunchai Airlines - Group 1
- */
 public class Group1_Uunchai {
 
     public static void main(String[] args) {
@@ -37,13 +33,13 @@ public class Group1_Uunchai {
 
             Login login = new Login();
 
-            login.setTitle("Uunchai Airlines - Login");
+            login.setTitle("Uunchai - Login");
             login.setLocationRelativeTo(null); // center
             login.setResizable(false);
             login.setVisible(true);
 
             System.out.println("===========================================");
-            System.out.println("Uunchai Airlines - Air Ticket Booking System");
+            System.out.println("Uunchai - Air Ticket Booking System");
             System.out.println("Application started successfully");
             System.out.println("===========================================");
         });

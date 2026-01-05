@@ -10,7 +10,7 @@ import model.User;
 import javax.swing.JOptionPane;
 
 public class RegisterController {
-    private UserDao userDao;
+    private final UserDao userDao;
     
     public RegisterController() {
         this.userDao = new UserDao();

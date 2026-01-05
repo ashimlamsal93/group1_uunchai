@@ -46,21 +46,16 @@ public class Registration extends javax.swing.JFrame {
         username = new javax.swing.JTextField();
         phone = new javax.swing.JTextField();
         email = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        Login = new javax.swing.JLabel();
         registerbtn = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
         confirmpassword = new javax.swing.JPasswordField();
         password1 = new javax.swing.JPasswordField();
-        fbicon = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         SecurityAnswer = new javax.swing.JTextField();
         SecurityQuestion = new javax.swing.JComboBox<>();
         jToolBar1 = new javax.swing.JToolBar();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        applogo = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,7 +98,7 @@ public class Registration extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Already have an account?  ");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(110, 390, 170, 20);
+        jLabel1.setBounds(110, 420, 170, 20);
 
         username.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -130,10 +125,15 @@ public class Registration extends javax.swing.JFrame {
         jPanel2.add(email);
         email.setBounds(150, 150, 180, 30);
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setText("Login");
-        jPanel2.add(jLabel8);
-        jLabel8.setBounds(280, 390, 40, 20);
+        Login.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Login.setText("Login");
+        Login.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LoginMouseClicked(evt);
+            }
+        });
+        jPanel2.add(Login);
+        Login.setBounds(280, 420, 40, 20);
 
         registerbtn.setBackground(new java.awt.Color(51, 153, 255));
         registerbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -141,12 +141,7 @@ public class Registration extends javax.swing.JFrame {
         registerbtn.setBorder(null);
         registerbtn.addActionListener(this::registerbtnActionPerformed);
         jPanel2.add(registerbtn);
-        registerbtn.setBounds(100, 360, 240, 20);
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setText("or");
-        jPanel2.add(jLabel9);
-        jLabel9.setBounds(200, 420, 20, 20);
+        registerbtn.setBounds(100, 380, 240, 20);
 
         confirmpassword.addActionListener(this::confirmpasswordActionPerformed);
         jPanel2.add(confirmpassword);
@@ -155,14 +150,6 @@ public class Registration extends javax.swing.JFrame {
         password1.addActionListener(this::password1ActionPerformed);
         jPanel2.add(password1);
         password1.setBounds(150, 270, 180, 30);
-
-        fbicon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-facebook-30.png"))); // NOI18N
-        jPanel2.add(fbicon);
-        fbicon.setBounds(240, 450, 40, 30);
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-google-30.png"))); // NOI18N
-        jPanel2.add(jLabel10);
-        jLabel10.setBounds(150, 440, 30, 50);
 
         jLabel11.setText("SecurityQuestion:");
         jPanel2.add(jLabel11);
@@ -195,11 +182,9 @@ public class Registration extends javax.swing.JFrame {
         jToolBar1.setBackground(new java.awt.Color(51, 153, 255));
         jToolBar1.setBorder(null);
         jToolBar1.setRollover(true);
-        jToolBar1.add(jLabel23);
-        jToolBar1.add(jLabel24);
 
-        applogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo 1.2.png"))); // NOI18N
-        jToolBar1.add(applogo);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/company _logo.png"))); // NOI18N
+        jToolBar1.add(jLabel8);
 
         jPanel1.add(jToolBar1);
         jToolBar1.setBounds(0, 0, 910, 50);
@@ -273,6 +258,18 @@ public class Registration extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SecurityQuestionActionPerformed
 
+    private void LoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginMouseClicked
+    int choice = JOptionPane.showConfirmDialog(this, 
+            "Are you sure you want to go back to Login?\nUnsaved data will be lost.", 
+            "Back to Login", 
+            JOptionPane.YES_NO_OPTION);
+        
+        if (choice == JOptionPane.YES_OPTION) {
+            this.dispose();  // Close registration form
+            new Login().setVisible(true);  // Open login form
+        }       // TODO add your handling code here:
+    }//GEN-LAST:event_LoginMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -299,26 +296,21 @@ public class Registration extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Login;
     private javax.swing.JTextField SecurityAnswer;
     private javax.swing.JComboBox<String> SecurityQuestion;
-    private javax.swing.JLabel applogo;
     private javax.swing.JPasswordField confirmpassword;
     private javax.swing.JTextField email;
-    private javax.swing.JLabel fbicon;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar jToolBar1;
@@ -347,7 +339,7 @@ public class Registration extends javax.swing.JFrame {
     }
     
     /**
-     * @return The username JTextField.
+     * @return The username JLoginld.
      */
     public javax.swing.JTextField getUsernameField(){
         return username;

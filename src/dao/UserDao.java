@@ -98,17 +98,18 @@ public class UserDao {
     }
    
     // Verify security answer
-    public boolean verifySecurityAnswer(String email, String answer) {
-        String query = "SELECT * FROM users WHERE email = ? AND SecurityAnswer = ?";
+    public boolean verifySecurityAnswer(String email, String question, String answer) {
+        String query = "SELECT 1 FROM users WHERE email = ? AND SecurityQuestion = ? AND LOWER(TRIM(SecurityAnswer)) = LOWER(TRIM(?))";
         try (Connection conn = MySqlConnection.getConnection();
              PreparedStatement pst = conn.prepareStatement(query)) {
-           
-            pst.setString(1, email);
-            pst.setString(2, answer);
-           
+          
+            pst.setString(1, email.trim());
+            pst.setString(2, question.trim());
+            pst.setString(3, answer.trim().toLowerCase());
+          
             ResultSet rs = pst.executeQuery();
             return rs.next();
-           
+          
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

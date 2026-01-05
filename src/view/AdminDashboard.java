@@ -8,6 +8,7 @@ import dao.UserDao;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 
 public class AdminDashboard extends javax.swing.JFrame {
 
@@ -16,10 +17,14 @@ public class AdminDashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("Admin Dashboard - Uunchai Airlines");
 
-        // Added backend initialization
+        // Initialize everything
         populateComboBoxes();
         loadRegisteredUsers();
         setupButtonActions();
+
+        // Set date format for calendar
+        departureDateChooser.setDateFormatString("yyyy-MM-dd HH:mm");
+        arrivalDateChooser.setDateFormatString("yyyy-MM-dd HH:mm");
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -27,13 +32,13 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        Dashboard = new javax.swing.JLabel();
-        AddFlight = new javax.swing.JLabel();
-        ViewUsers = new javax.swing.JLabel();
-        Logout = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -48,12 +53,12 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        DepartureTime = new javax.swing.JTextField();
-        ArrivalTime = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         Price = new javax.swing.JTextField();
         btnAddFlight = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
+        departureDateChooser = new com.toedter.calendar.JDateChooser();
+        arrivalDateChooser = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         RegisteredUsers = new javax.swing.JLabel();
         jScrollBar1 = new javax.swing.JScrollBar();
@@ -69,8 +74,8 @@ public class AdminDashboard extends javax.swing.JFrame {
         jToolBar1.setBackground(new java.awt.Color(51, 153, 255));
         jToolBar1.setRollover(true);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo 1.2.png"))); // NOI18N
-        jToolBar1.add(jLabel1);
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/company _logo.png"))); // NOI18N
+        jToolBar1.add(jLabel16);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Welcome Admin!");
@@ -83,34 +88,33 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 51), 3, true));
         jPanel2.setLayout(null);
 
-        Dashboard.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Dashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-dashboard-24.png"))); // NOI18N
-        Dashboard.setText("Dashboard");
-        jPanel2.add(Dashboard);
-        Dashboard.setBounds(10, 50, 120, 24);
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-dashboard-24.png"))); // NOI18N
+        jLabel3.setText("Dashboard");
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(20, 50, 100, 30);
 
-        AddFlight.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        AddFlight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-airplane-24.png"))); // NOI18N
-        AddFlight.setText("Add Flight");
-        jPanel2.add(AddFlight);
-        AddFlight.setBounds(10, 100, 110, 20);
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-airplane-24.png"))); // NOI18N
+        jLabel4.setText("Add Flight");
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(20, 110, 90, 24);
 
-        ViewUsers.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        ViewUsers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-users-30.png"))); // NOI18N
-        ViewUsers.setText("View Users");
-        jPanel2.add(ViewUsers);
-        ViewUsers.setBounds(10, 150, 130, 30);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-users-30.png"))); // NOI18N
+        jLabel5.setText("View Users");
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(10, 160, 100, 30);
 
-        Logout.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-logout-30.png"))); // NOI18N
-        Logout.setText("Logout");
-        Logout.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-logout-30.png"))); // NOI18N
+        jLabel6.setText("Logout");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LogoutMouseClicked(evt);
+                jLabel6MouseClicked(evt);
             }
         });
-        jPanel2.add(Logout);
-        Logout.setBounds(10, 490, 100, 40);
+        jPanel2.add(jLabel6);
+        jLabel6.setBounds(20, 490, 80, 30);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 50, 210, 550);
@@ -170,10 +174,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel14.setText("Arrival Time");
         jPanel3.add(jLabel14);
         jLabel14.setBounds(290, 170, 80, 20);
-        jPanel3.add(DepartureTime);
-        DepartureTime.setBounds(20, 200, 190, 30);
-        jPanel3.add(ArrivalTime);
-        ArrivalTime.setBounds(290, 200, 190, 30);
 
         jLabel15.setText("Price");
         jPanel3.add(jLabel15);
@@ -190,6 +190,10 @@ public class AdminDashboard extends javax.swing.JFrame {
         btnClear.setText("Clear");
         jPanel3.add(btnClear);
         btnClear.setBounds(410, 260, 80, 30);
+        jPanel3.add(departureDateChooser);
+        departureDateChooser.setBounds(20, 200, 190, 30);
+        jPanel3.add(arrivalDateChooser);
+        arrivalDateChooser.setBounds(290, 200, 190, 30);
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(220, 60, 540, 310);
@@ -227,7 +231,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,17 +243,16 @@ public class AdminDashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutMouseClicked
-int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            this.dispose();
-            new Login().setVisible(true);
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_LogoutMouseClicked
-
     private void FlightIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FlightIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FlightIDActionPerformed
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+       Login log = new Login();
+       log.setVisible(true);
+   
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -275,60 +278,62 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
         btnClear.addActionListener(evt -> clearForm());
     }
 
-    private void addFlight() {
+   private void addFlight() {
         String flightId = FlightID.getText().trim();
         String airlineName = AirlineName.getText().trim();
         String source = Source.getSelectedItem().toString();
         String destination = Destination.getSelectedItem().toString();
-        String departure = DepartureTime.getText().trim();
-        String arrival = ArrivalTime.getText().trim();
         String priceStr = Price.getText().trim();
 
-        // validation
-        if (flightId.isEmpty() || airlineName.isEmpty() || departure.isEmpty() ||
-            arrival.isEmpty() || priceStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill all fields", "Input Error", JOptionPane.ERROR_MESSAGE);
+        // Validation
+        if (flightId.isEmpty() || airlineName.isEmpty() || priceStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill Flight ID, Airline Name and Price", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (source.equals(destination)) {
-            JOptionPane.showMessageDialog(this, "Source and destination cannot be the same", "Input Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Source and destination cannot be the same", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        java.util.Date depDate = departureDateChooser.getDate();
+        java.util.Date arrDate = arrivalDateChooser.getDate();
+
+        if (depDate == null || arrDate == null) {
+            JOptionPane.showMessageDialog(this, "Please select both departure and arrival dates", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         double price;
         try {
             price = Double.parseDouble(priceStr);
-            if (price <= 0) throw new NumberFormatException();
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Price must be a positive number", "Input Error", JOptionPane.ERROR_MESSAGE);
+            if (price <= 0) throw new Exception();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Price must be a positive number", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // basic datetime format check
-        if (!departure.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}") ||
-            !arrival.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}")) {
-            JOptionPane.showMessageDialog(this, "Use format: YYYY-MM-DD HH:MM\nExample: 2025-12-26 14:30", "Format Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String departure = sdf.format(depDate);
+        String arrival = sdf.format(arrDate);
 
         FlightDao dao = new FlightDao();
         boolean success = dao.addFlight(flightId, airlineName, source, destination, departure, arrival, price, 100);
 
         if (success) {
-            JOptionPane.showMessageDialog(this, "Flight added successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Flight added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
             clearForm();
         } else {
-            JOptionPane.showMessageDialog(this, "Could not add flight.\n(Flight ID might already exist)", "Database Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Failed to add flight. Flight ID may already exist.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void clearForm() {
+   private void clearForm() {
         FlightID.setText("");
         AirlineName.setText("");
-        DepartureTime.setText("");
-        ArrivalTime.setText("");
         Price.setText("");
+        departureDateChooser.setDate(null);
+        arrivalDateChooser.setDate(null);
         Source.setSelectedIndex(0);
         if (Destination.getItemCount() > 1) {
             Destination.setSelectedIndex(1);
@@ -374,28 +379,28 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AddFlight;
     private javax.swing.JTextField AirlineName;
-    private javax.swing.JTextField ArrivalTime;
-    private javax.swing.JLabel Dashboard;
-    private javax.swing.JTextField DepartureTime;
     private javax.swing.JComboBox<String> Destination;
     private javax.swing.JTextField FlightID;
-    private javax.swing.JLabel Logout;
     private javax.swing.JTextField Price;
     private javax.swing.JLabel RegisteredUsers;
     private javax.swing.JComboBox<String> Source;
-    private javax.swing.JLabel ViewUsers;
+    private com.toedter.calendar.JDateChooser arrivalDateChooser;
     private javax.swing.JButton btnAddFlight;
     private javax.swing.JButton btnClear;
-    private javax.swing.JLabel jLabel1;
+    private com.toedter.calendar.JDateChooser departureDateChooser;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
