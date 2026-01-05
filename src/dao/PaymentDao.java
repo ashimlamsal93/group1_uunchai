@@ -4,7 +4,7 @@
  */
 package dao;
 
-import Database.MySqlConnection;
+import database.MySqlConnection;
 import java.sql.*;
 
 public class PaymentDao {

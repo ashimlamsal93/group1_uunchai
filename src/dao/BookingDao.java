@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dao;
-import Database.MySqlConnection;
+import database.MySqlConnection;
 import model.Passenger;
 import java.sql.*;
 import java.util.List;

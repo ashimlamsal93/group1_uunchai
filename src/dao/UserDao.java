@@ -4,7 +4,7 @@
  */
 
 package dao;
-import Database.MySqlConnection;  // Fixed package name
+import database.MySqlConnection;  // Fixed package name
 import model.User;
 import java.sql.*;
 

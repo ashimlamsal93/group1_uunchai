@@ -5,7 +5,7 @@
 package view;
 
 import model.User;
-import Database.MySqlConnection;
+import database.MySqlConnection;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
