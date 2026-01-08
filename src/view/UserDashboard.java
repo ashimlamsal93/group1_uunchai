@@ -63,11 +63,11 @@ public class UserDashboard extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         profile = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         Logout = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         SearchFlights = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -123,11 +123,6 @@ public class UserDashboard extends javax.swing.JFrame {
         jPanel2.add(jLabel10);
         jLabel10.setBounds(10, 200, 100, 30);
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-notification-30.png"))); // NOI18N
-        jLabel11.setText("Notification");
-        jPanel2.add(jLabel11);
-        jLabel11.setBounds(10, 240, 120, 30);
-
         profile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-profile-30.png"))); // NOI18N
         profile.setText("Profile");
         profile.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -162,6 +157,11 @@ public class UserDashboard extends javax.swing.JFrame {
         });
         jPanel2.add(jLabel16);
         jLabel16.setBounds(10, 150, 120, 40);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-notification-30.png"))); // NOI18N
+        jLabel5.setText("Notifications");
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(10, 250, 110, 30);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 60, 190, 540);
@@ -358,13 +358,13 @@ Login log = new Login();
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
