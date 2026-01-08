@@ -15,13 +15,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Booking extends JFrame {
-
     private User currentUser;
     private int flightId;
     private String route;
     private String time;
     private double price;
     private int travellers;
+    private double discount = 0;  // For promo discount
 
     public Booking(User user, int flightId, String route, String time, double price, int travellers) {
         this.currentUser = user;
@@ -40,8 +40,7 @@ public class Booking extends JFrame {
     private void loadFlightInfo() {
         txtFlightInfo.setText(route + " | " + time + " | NPR " + price);
         txtFlightInfo.setEditable(false);
-        spTravellers.setValue(travellers);
- 
+        spTravellers.setValue(travellers);    
 }
 
     /**
@@ -69,6 +68,10 @@ public class Booking extends JFrame {
         btnBook = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         cmbGender1 = new javax.swing.JComboBox<>();
+        lblDiscount = new javax.swing.JLabel();
+        txtPromoCode = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        btnApplyPromo = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,7 +109,7 @@ public class Booking extends JFrame {
         jPanel2.add(jLabel3);
         jLabel3.setBounds(330, 120, 37, 16);
         jPanel2.add(txtAge1);
-        txtAge1.setBounds(330, 140, 180, 30);
+        txtAge1.setBounds(330, 140, 190, 30);
 
         jLabel4.setText("Number of Travellers");
         jPanel2.add(jLabel4);
@@ -126,7 +129,7 @@ public class Booking extends JFrame {
             }
         });
         jPanel2.add(btnBook);
-        btnBook.setBounds(120, 310, 140, 40);
+        btnBook.setBounds(110, 430, 140, 40);
 
         btnCancel.setBackground(new java.awt.Color(51, 153, 255));
         btnCancel.setText("Cancel");
@@ -136,14 +139,40 @@ public class Booking extends JFrame {
             }
         });
         jPanel2.add(btnCancel);
-        btnCancel.setBounds(340, 310, 130, 40);
+        btnCancel.setBounds(330, 430, 130, 40);
 
         cmbGender1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Others" }));
         jPanel2.add(cmbGender1);
         cmbGender1.setBounds(30, 230, 190, 30);
 
+        lblDiscount.setText("Discount :NPR 0");
+        jPanel2.add(lblDiscount);
+        lblDiscount.setBounds(30, 280, 130, 30);
+
+        txtPromoCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPromoCodeActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtPromoCode);
+        txtPromoCode.setBounds(30, 340, 190, 30);
+
+        jLabel8.setText("Promo Code");
+        jPanel2.add(jLabel8);
+        jLabel8.setBounds(30, 320, 80, 16);
+
+        btnApplyPromo.setBackground(new java.awt.Color(51, 153, 255));
+        btnApplyPromo.setText("Apply");
+        btnApplyPromo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyPromoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnApplyPromo);
+        btnApplyPromo.setBounds(290, 340, 90, 30);
+
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(90, 100, 600, 430);
+        jPanel2.setBounds(90, 100, 600, 510);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Flight Details");
@@ -179,43 +208,37 @@ int choice = JOptionPane.showConfirmDialog(this, "Cancel booking?", "Confirm", J
         String gender = (String) cmbGender1.getSelectedItem();
         int travellers = (Integer) spTravellers.getValue();
 
-        // Validation
         if (name.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter passenger name", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
         int age;
         try {
             age = Integer.parseInt(ageStr);
-            if (age <= 0 || age > 120) {
-                throw new NumberFormatException();
-            }
+            if (age <= 0 || age > 120) throw new NumberFormatException();
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Please enter a valid age (1-120)", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
         if (travellers <= 0) {
             JOptionPane.showMessageDialog(this, "Number of travellers must be at least 1", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Calculate total amount
         double totalAmount = price * travellers;
+        double finalAmount = totalAmount - discount;
+        if (finalAmount < 0) finalAmount = 0;
 
-        // Create passenger list (required by your confirmBooking method)
         List<Passenger> passengers = new ArrayList<>();
         passengers.add(new Passenger(name, age, gender));
 
-        // Call your existing confirmBooking method
         BookingController bookingController = new BookingController();
         String pnr = bookingController.confirmBooking(
-            currentUser.getId(),     // userId
-            flightId,                // flightId
-            travellers,              // numPassengers
-            totalAmount,             // totalAmount
-            passengers               // List<Passenger>
+            currentUser.getId(),
+            flightId,
+            travellers,
+            finalAmount,
+            passengers
         );
 
         if (pnr == null) {
@@ -223,20 +246,42 @@ int choice = JOptionPane.showConfirmDialog(this, "Cancel booking?", "Confirm", J
             return;
         }
 
-        // Success message
         JOptionPane.showMessageDialog(this,
-            "Booking Confirmed!\nPNR: " + pnr + "\nProceeding to payment...",
+            "Booking Confirmed!\nPNR: " + pnr + "\nFinal Amount: NPR " + finalAmount + "\nProceeding to payment...",
             "Success", JOptionPane.INFORMATION_MESSAGE);
 
-        // Navigate to Payment Page
-        PaymentPage paymentPage = new PaymentPage(pnr, totalAmount, route, time, name, travellers);
+        PaymentPage paymentPage = new PaymentPage(pnr, finalAmount, route, time, name, travellers);
         paymentPage.setVisible(true);
-
-        // Close current booking window
         this.dispose();
     }//GEN-LAST:event_btnBookActionPerformed
 
+    private void txtPromoCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPromoCodeActionPerformed
+       btnApplyPromoActionPerformed(evt);// TODO add your handling code here:
+    }//GEN-LAST:event_txtPromoCodeActionPerformed
+
+    private void btnApplyPromoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyPromoActionPerformed
+       String code = txtPromoCode.getText().trim().toUpperCase();
+
+        discount = 0;  // reset
+
+        double totalAmount = price * travellers;
+
+        if (code.equals("UUNCHAI50")) {
+            discount = totalAmount * 0.5;  // 50% off
+            JOptionPane.showMessageDialog(this, "50% discount applied!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else if (code.equals("FLY100")) {
+            discount = 100 * travellers;
+            if (discount > totalAmount) discount = totalAmount;
+            JOptionPane.showMessageDialog(this, "NPR 100 off per traveller!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else if (!code.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Invalid promo code", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        lblDiscount.setText("Discount: NPR " + discount); // TODO add your handling code here:
+    }//GEN-LAST:event_btnApplyPromoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnApplyPromo;
     private javax.swing.JButton btnBook;
     private javax.swing.JButton btnCancel;
     private javax.swing.JComboBox<String> cmbGender1;
@@ -247,12 +292,15 @@ int choice = JOptionPane.showConfirmDialog(this, "Cancel booking?", "Confirm", J
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lblDiscount;
     private javax.swing.JSpinner spTravellers;
     private javax.swing.JTextField txtAge1;
     private javax.swing.JTextField txtFlightInfo;
     private javax.swing.JTextField txtName1;
+    private javax.swing.JTextField txtPromoCode;
     // End of variables declaration//GEN-END:variables
 }
