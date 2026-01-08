@@ -4,54 +4,49 @@
  */
 package group1_uunchai;
 
-
-//import controller.FlightController;
-// import controller.FlightController;
-// import controller.PassengerController;
-// import view.FlightBookingHistory;
-import controller.RegistrationController;
-import view.PassengerForm;
-//import view.FlightBookingHistory;
-
-import controller.RegistrationController;
-import database.Database;
-import database.MySqlConnection;
-import view.Registration;
+import view.Login;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 
 public class Group1_Uunchai {
 
     public static void main(String[] args) {
 
-        // java.awt.EventQueue.invokeLater(() -> {
-        //     new Reset_Password().setVisible(true);
-        // });
+        // ✅ Set Nimbus Look and Feel safely
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException |
+                 InstantiationException |
+                 IllegalAccessException |
+                 UnsupportedLookAndFeelException ex) {
 
-       Registration reg = new Registration();
-       UserController userC = new UserController(reg);
-       userC.open();
-   }}
-        // Optional: open registration form
-        // Registration register = new Registration();
-//    }
-//}
-
-
-
-
-//    public static void main(String[] args) {
-      
-      //    FlightBookingHistory flight = new FlightBookingHistory();
-      //    FlightController fc = new FlightController(flight);
-      //    flight.setVisible(true);
-      // }}
+            System.err.println("⚠ Unable to set Nimbus Look & Feel");
+        }
 
 
-    
-   
-//  PassengerForm myForm = new PassengerForm();
-//    new PassengerController(myForm);
-//    
-//    myForm.setVisible(true);
-//    myForm.setLocationRelativeTo(null);
-//}
+        // ✅ Always launch Swing UI on EDT
+        SwingUtilities.invokeLater(() -> {
+
+            Login login = new Login();
+
+            login.setTitle("Uunchai - Login");
+            login.setLocationRelativeTo(null); // center
+            login.setResizable(false);
+            login.setVisible(true);
+
+
+            System.out.println("===========================================");
+            System.out.println("Uunchai - Air Ticket Booking System");
+            System.out.println("Application started successfully");
+            System.out.println("===========================================");
+        });
+    }
+}
+

@@ -4,9 +4,12 @@
  */
 package view;
 
-import controller.RegistrationController;
+
+import controller.RegisterController;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import model.User;
 
 /**
  *
@@ -32,47 +35,320 @@ public class Registration extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        username = new javax.swing.JTextField();
+        phone = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
+        Login = new javax.swing.JLabel();
+        registerbtn = new javax.swing.JButton();
+        confirmpassword = new javax.swing.JPasswordField();
+        password1 = new javax.swing.JPasswordField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        SecurityAnswer = new javax.swing.JTextField();
+        SecurityQuestion = new javax.swing.JComboBox<>();
+        jToolBar1 = new javax.swing.JToolBar();
+        jLabel8 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel1.setLayout(null);
+
+        jPanel2.setBackground(new java.awt.Color(113, 171, 252));
+        jPanel2.setLayout(null);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Username:");
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(60, 50, 70, 20);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Phone:");
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(70, 100, 60, 20);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("Email:");
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(80, 150, 50, 16);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("Password:");
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(70, 270, 80, 20);
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setText("Confirm Password:");
+        jPanel2.add(jLabel6);
+        jLabel6.setBounds(20, 310, 120, 30);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setText("Registration");
+        jPanel2.add(jLabel7);
+        jLabel7.setBounds(170, 20, 110, 25);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("Already have an account?  ");
+        jPanel2.add(jLabel1);
+        jLabel1.setBounds(110, 420, 170, 20);
+
+        username.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                usernameMouseDragged(evt);
+            }
+        });
+        jPanel2.add(username);
+        username.setBounds(150, 50, 180, 30);
+
+        phone.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                phoneMouseDragged(evt);
+            }
+        });
+        phone.addActionListener(this::phoneActionPerformed);
+        jPanel2.add(phone);
+        phone.setBounds(150, 100, 180, 30);
+
+        email.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                emailMouseDragged(evt);
+            }
+        });
+        jPanel2.add(email);
+        email.setBounds(150, 150, 180, 30);
+
+        Login.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Login.setText("Login");
+        Login.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LoginMouseClicked(evt);
+            }
+        });
+        jPanel2.add(Login);
+        Login.setBounds(280, 420, 40, 20);
+
+        registerbtn.setBackground(new java.awt.Color(51, 153, 255));
+        registerbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        registerbtn.setText("Register");
+        registerbtn.setBorder(null);
+        registerbtn.addActionListener(this::registerbtnActionPerformed);
+        jPanel2.add(registerbtn);
+        registerbtn.setBounds(100, 380, 240, 20);
+
+        confirmpassword.addActionListener(this::confirmpasswordActionPerformed);
+        jPanel2.add(confirmpassword);
+        confirmpassword.setBounds(150, 310, 180, 30);
+
+        password1.addActionListener(this::password1ActionPerformed);
+        jPanel2.add(password1);
+        password1.setBounds(150, 270, 180, 30);
+
+        jLabel11.setText("SecurityQuestion:");
+        jPanel2.add(jLabel11);
+        jLabel11.setBounds(40, 190, 100, 16);
+
+        jLabel12.setText("SecurityAnswer:");
+        jPanel2.add(jLabel12);
+        jLabel12.setBounds(40, 230, 100, 16);
+
+        SecurityAnswer.addActionListener(this::SecurityAnswerActionPerformed);
+        jPanel2.add(SecurityAnswer);
+        SecurityAnswer.setBounds(150, 230, 180, 30);
+
+        SecurityQuestion.setModel(new javax.swing.DefaultComboBoxModel<>(
+            new String[] {
+                "Select a security question",
+                "What is your favorite place?",
+                "What is your pet's name?",
+                "What was your first school?",
+                "What is your mother's maiden name?"
+            }
+        ));
+        SecurityQuestion.addActionListener(this::SecurityQuestionActionPerformed);
+        jPanel2.add(SecurityQuestion);
+        SecurityQuestion.setBounds(150, 190, 180, 30);
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(170, 60, 420, 530);
+
+        jToolBar1.setBackground(new java.awt.Color(51, 153, 255));
+        jToolBar1.setBorder(null);
+        jToolBar1.setRollover(true);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/company _logo.png"))); // NOI18N
+        jToolBar1.add(jLabel8);
+
+        jPanel1.add(jToolBar1);
+        jToolBar1.setBounds(0, 0, 910, 50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Registration().setVisible(true));
+    private void registerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerbtnActionPerformed
+    String name = username.getText().trim();  // Replace with your username field name
+    String contact = phone.getText().trim();  // Replace with your contact field name
+    String emailId = email.getText().trim();  // Replace with your email field name
+    String securityQuestion =  SecurityQuestion.getSelectedItem().toString();  // Your combo box
+    String securityAnswer = SecurityAnswer.getText().trim();  // Your security answer field
+    String password = new String(password1.getPassword());
+    String confirmPassword = new String(confirmpassword.getPassword());
+    // Check if passwords match
+    if (!password.equals(confirmPassword)) {
+        JOptionPane.showMessageDialog(this, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
     }
+    
+    RegisterController controller = new RegisterController();
+    boolean success = controller.handleRegistration(name, emailId, password, contact, securityQuestion, securityAnswer);
+    
+    if (success) {
+        this.dispose();
+        new Login().setVisible(true);
+    }
+    }//GEN-LAST:event_registerbtnActionPerformed
+
+    private void emailMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMouseDragged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailMouseDragged
+
+    private void phoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneActionPerformed
+
+    private void phoneMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_phoneMouseDragged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneMouseDragged
+
+    private void usernameMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameMouseDragged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameMouseDragged
+
+    private void confirmpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmpasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmpasswordActionPerformed
+
+    private void password1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_password1ActionPerformed
+
+    private void SecurityAnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SecurityAnswerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SecurityAnswerActionPerformed
+
+    private void SecurityQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SecurityQuestionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SecurityQuestionActionPerformed
+
+    private void LoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginMouseClicked
+    int choice = JOptionPane.showConfirmDialog(this, 
+            "Are you sure you want to go back to Login?\nUnsaved data will be lost.", 
+            "Back to Login", 
+            JOptionPane.YES_NO_OPTION);
+        
+        if (choice == JOptionPane.YES_OPTION) {
+            this.dispose();  // Close registration form
+            new Login().setVisible(true);  // Open login form
+        }       // TODO add your handling code here:
+    }//GEN-LAST:event_LoginMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Login;
+    private javax.swing.JTextField SecurityAnswer;
+    private javax.swing.JComboBox<String> SecurityQuestion;
+    private javax.swing.JPasswordField confirmpassword;
+    private javax.swing.JTextField email;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JPasswordField password1;
+    private javax.swing.JTextField phone;
+    private javax.swing.JButton registerbtn;
+    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
+/**
+     * @param listner
+     */
+    
+    public void addUserListner(ActionListener l){
+        registerbtn.addActionListener(l);
+    }
+    
+    public javax.swing.JPasswordField getPasswordField(){
+        return  password1;
+    }
+    
+    /**
+     * @return The email JTextField.
+     */
+    public javax.swing.JTextField getEmailField(){
+        return email;
+    }
+    
+    /**
+     * @return The username JLoginld.
+     */
+    public javax.swing.JTextField getUsernameField(){
+        return username;
+    }
+
+    
+    /**
+     * @return The confirm password JPasswordField.
+     */
+    public javax.swing.JPasswordField getConfirmPasswordField(){
+        return  confirmpassword;
+    }
+    
+    /**
+     * @return The contact JTextField.
+     */
+    public javax.swing.JTextField getContactField(){
+        return phone;
+    }
+
+  
+
+    public String getCofirmPassword() {
+    return new String(confirmpassword.getPassword());
 }
+
+   public void clearForm() {
+    username.setText("");
+    email.setText("");
+    phone.setText("");
+    password1.setText("");
+    confirmpassword.setText("");
+}
+
+}
+
