@@ -25,7 +25,7 @@ public class PaymentPage extends JFrame {
     private int travellers;
 
     // Replace with your Stripe TEST secret key (from dashboard.stripe.com → Developers → API keys)
-    //private static final String STRIPE_SECRET_KEY = "sk_test_51SnfKdJYggDwdKZT4TirOAwalNbH5icb8E05BIby3G4HO7Ija46HXwGSaBxabluIC3UBHn6RSSx05JDklA5E1Cqv00eceYdA1O";  // ← PUT YOUR TEST SECRET KEY HERE
+   private static final String STRIPE_SECRET_KEY = System.getenv("STRIPE_SECRET_KEY");
 
     public PaymentPage(String pnr, double totalAmount, String route, String time, String passengerName, int travellers) {
         this.pnr = pnr;
@@ -41,7 +41,7 @@ public class PaymentPage extends JFrame {
         setLocationRelativeTo(null);
 
         // Initialize Stripe
-        //Stripe.apiKey = STRIPE_SECRET_KEY;
+        Stripe.apiKey = STRIPE_SECRET_KEY;
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
