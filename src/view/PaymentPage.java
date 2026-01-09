@@ -41,7 +41,7 @@ public class PaymentPage extends JFrame {
         setLocationRelativeTo(null);
 
         // Initialize Stripe
-        Stripe.apiKey = STRIPE_SECRET_KEY;
+        //Stripe.apiKey = STRIPE_SECRET_KEY;
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
