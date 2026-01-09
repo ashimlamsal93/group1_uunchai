@@ -15,7 +15,7 @@ public class Userprofile extends JFrame {
     public Userprofile(User user) {
         this.currentUser = user;
         initComponents();
-        setTitle("User Profile - Uunchai Airlines");
+        setTitle("User Profile - Uunchai");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         loadUserData(); // <-- call your method
